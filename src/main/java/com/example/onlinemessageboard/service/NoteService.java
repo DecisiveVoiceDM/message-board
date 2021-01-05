@@ -2,7 +2,6 @@ package com.example.onlinemessageboard.service;
 
 import com.example.onlinemessageboard.model.Note;
 import com.example.onlinemessageboard.repository.NoteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

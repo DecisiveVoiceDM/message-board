@@ -18,9 +18,6 @@ public class Note {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
     @JoinColumn(name = "user_id")
     private Long user_id;
 
@@ -33,7 +30,6 @@ public class Note {
         this.description = description;
         this.price = price;
         this.status = status;
-        this.phoneNumber = phoneNumber;
     }
 
     public Long getId() {
@@ -74,14 +70,6 @@ public class Note {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public Long getUser_id() {

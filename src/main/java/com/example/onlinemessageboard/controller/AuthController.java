@@ -1,27 +1,32 @@
 package com.example.onlinemessageboard.controller;
 
 import com.example.onlinemessageboard.jwt.JwtProvider;
-import com.example.onlinemessageboard.model.AuthRequest;
-import com.example.onlinemessageboard.model.AuthResponse;
-import com.example.onlinemessageboard.model.RegistrationRequestDTO;
+import com.example.onlinemessageboard.dto.AuthRequest;
+import com.example.onlinemessageboard.dto.AuthResponse;
+import com.example.onlinemessageboard.jwt.RegistrationRequestDTO;
 import com.example.onlinemessageboard.model.User;
+import com.example.onlinemessageboard.service.ProfileService;
 import com.example.onlinemessageboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AuthController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+    private final ProfileService profileService;
+    private final JwtProvider jwtProvider;
 
     @Autowired
-    private JwtProvider jwtProvider;
+    public AuthController(UserService userService, ProfileService profileService, JwtProvider jwtProvider) {
+        this.userService = userService;
+        this.profileService = profileService;
+        this.jwtProvider = jwtProvider;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegistrationRequestDTO registrationRequestDTO) {
@@ -32,6 +37,7 @@ public class AuthController {
         user.setLastName(registrationRequestDTO.getLastName());
         user.setAge(registrationRequestDTO.getAge());
         userService.saveUser(user);
+        profileService.saveProfile(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

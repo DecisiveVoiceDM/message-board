@@ -1,7 +1,6 @@
 package com.example.onlinemessageboard.model;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 
 @Entity
 @Table(name = "users")

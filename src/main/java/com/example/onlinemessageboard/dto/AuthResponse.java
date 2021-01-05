@@ -1,4 +1,4 @@
-package com.example.onlinemessageboard.model;
+package com.example.onlinemessageboard.dto;
 
 public class AuthResponse {
     private String token;

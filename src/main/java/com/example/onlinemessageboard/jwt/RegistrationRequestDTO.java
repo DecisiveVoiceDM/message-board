@@ -1,4 +1,4 @@
-package com.example.onlinemessageboard.model;
+package com.example.onlinemessageboard.jwt;
 
 public class RegistrationRequestDTO {
     private String email;

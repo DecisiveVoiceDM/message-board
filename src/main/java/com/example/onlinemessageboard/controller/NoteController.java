@@ -9,9 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.Path;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -79,13 +77,13 @@ public class NoteController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public boolean hasAccess(Principal principal, Long documentId) {
+    public boolean hasAccess(Principal principal, Long noteId) {
         if (isAdmin(principal)) {
             return true;
         }
         try {
             User user = userService.findByEmail(principal.getName());
-            return noteService.getById(documentId).getUser_id().equals(user.getId());
+            return noteService.getById(noteId).getUser_id().equals(user.getId());
         } catch (NoSuchElementException e) {
             return true;
         }
