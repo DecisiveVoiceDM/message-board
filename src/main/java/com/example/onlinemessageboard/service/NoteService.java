@@ -1,17 +1,39 @@
 package com.example.onlinemessageboard.service;
 
 import com.example.onlinemessageboard.model.Note;
+import com.example.onlinemessageboard.repository.NoteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface NoteService {
-    List<Note> getAll();
+@Service
+public class NoteService {
 
-    Note getById(Long id);
+    private final NoteRepository noteRepository;
 
-    void create(Note note);
+    public NoteService(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
 
-    void update(Long id, Note note);
+    public List<Note> getAll() {
+        return noteRepository.findAll();
+    }
 
-    void delete(Long id);
+    public Note getById(Long id) {
+        return noteRepository.findById(id).get();
+    }
+
+    public void create(Note note) {
+        noteRepository.save(note);
+    }
+
+    public void update(Long id, Note note) {
+        note.setId(id);
+        noteRepository.save(note);
+    }
+
+    public void delete(Long id) {
+        noteRepository.deleteById(id);
+    }
 }

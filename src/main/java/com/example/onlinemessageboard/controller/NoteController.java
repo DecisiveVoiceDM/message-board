@@ -18,8 +18,8 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/api/notes")
 public class NoteController {
-    private NoteService noteService;
-    private UserService userService;
+    private final NoteService noteService;
+    private final UserService userService;
 
     @Autowired
     public NoteController(NoteService noteService, UserService userService) {
